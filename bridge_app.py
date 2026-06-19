@@ -66,7 +66,7 @@ st.divider()
 with st.expander("ℹ️ About this tool"):
     st.markdown(
         """
-        This predictor uses a **surrogate model** fit to **48 ANSYS finite-element analyses**
+        This predictor uses a **model** fit to **48 ANSYS finite-element analyses**
         of reinforced-concrete box-girder bridges under self-weight.
 
         - **Mean error:** 1.2% &nbsp;|&nbsp; **Max error:** 4.3% (within validated range)

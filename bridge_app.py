@@ -16,12 +16,12 @@ st.set_page_config(
 # ---- header ----
 st.title("🌉 RC Box-Girder Deflection Predictor")
 st.markdown(
-    "Predict maximum girder deflection after **staged full-depth deck replacement** — "
+    "Predict maximum girder deflection of an **RC box-girder bridge** under self-weight — "
     "instantly, with no ANSYS required."
 )
 st.divider()
 
-# ---- inputs in a styled container ----
+# ---- inputs ----
 st.subheader("Bridge Parameters")
 col1, col2, col3 = st.columns(3)
 with col1:
@@ -34,7 +34,7 @@ with col3:
     fc = st.number_input("f'c (psi)", value=4000.0, min_value=2000.0, max_value=8000.0,
                          help="Concrete compressive strength")
 
-st.write("")  # spacing
+st.write("")
 calc = st.button("Calculate Deflection", type="primary", use_container_width=True)
 
 # ---- results ----
@@ -53,7 +53,6 @@ if calc:
               delta=f"{(1-ratio)*100:.0f}% margin" if ratio < 1 else "OVER",
               delta_color="normal" if ratio < 1 else "inverse")
 
-    # visual progress bar showing how close to the limit
     st.write("**Utilization of deflection limit:**")
     st.progress(min(ratio, 1.0))
 
@@ -62,7 +61,6 @@ if calc:
     else:
         st.error(f"⚠️ EXCEEDS deflection limit (ratio {ratio:.2f}).")
 
-    # range warning
     if not (480 <= span <= 900 and 29 <= depth <= 81 and 4000 <= fc <= 5000):
         st.warning(
             "⚠️ Outside validated range (span 480–900 in, depth 29–81 in, "
@@ -75,7 +73,7 @@ with st.expander("ℹ️ About this tool"):
     st.markdown(
         """
         This predictor uses a **surrogate model** fit to **48 ANSYS finite-element analyses**
-        of reinforced-concrete box-girder bridges undergoing staged full-depth deck replacement.
+        of reinforced-concrete box-girder bridges under self-weight.
 
         - **Mean error:** 1.2% &nbsp;|&nbsp; **Max error:** 4.3% (within validated range)
         - **Method:** power-law regression on FE results
@@ -85,4 +83,4 @@ with st.expander("ℹ️ About this tool"):
         requiring no ANSYS software.
         """
     )
-    st.caption("Developed as part of ADOT-funded research on box-girder deck replacement.")
+    st.caption("Developed as part of ADOT-funded research on box-girder bridges.")

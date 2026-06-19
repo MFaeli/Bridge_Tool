@@ -6,7 +6,7 @@ def predict_deflection(span, depth, fc):
     return C * span**A * depth**B * fc**Cc
 
 st.set_page_config(page_title="Box-Girder Deflection Predictor", page_icon="🌉")
-st.title("RC Box-Girder Deck-Removal Deflection Predictor")
+st.title("RC Box-Girder Deflection Predictor")
 st.caption("Surrogate model — instant prediction, no ANSYS required")
 st.write("Enter the bridge parameters below:")
 
